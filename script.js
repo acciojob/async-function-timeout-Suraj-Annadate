@@ -1,25 +1,23 @@
 //your JS code here. If required.
+const inputText = document.getElementById('text');
+const inputDelay = document.getElementById('delay');
 const btn = document.getElementById('btn');
-    const output = document.getElementById('output');
+const outputDiv = document.getElementById('output');
 
-    async function displayTextWithDelay() {
-      const text = document.getElementById('text').value;
-      const delay = document.getElementById('delay').value;
+// Function to display the message after a delay
+async function displayMessageWithDelay() {
+  // Get the user input values
+  const text = inputText.value;
+  const delay = parseInt(inputDelay.value);
 
-      // Validate input
-      if (!text || !delay) {
-        output.textContent = 'Please provide both text and delay values.';
-        return;
-      }
+  // Wait for the specified delay
+  await new Promise(resolve => setTimeout(resolve, delay));
 
-      output.textContent = 'Waiting for the delay...';
+  // Display the message on the webpage
+  outputDiv.textContent = text;
+}
 
-      // Convert delay to a number
-      const delayMilliseconds = Number(delay);
-
-      // Wait for the specified delay
-      await new Promise(resolve => setTimeout(resolve, delayMilliseconds));
-
-      // Display the text after the delay
-      output.textContent = text;
-    }
+// Event listener for the button click
+btn.addEventListener('click', () => {
+  displayMessageWithDelay();
+});
